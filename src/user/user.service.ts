@@ -11,23 +11,28 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ){}
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
+  create(user: CreateUserDto) {
+    return this.userRepository.save(this.userRepository.create(user));
   }
 
   findAll() {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOneBy({id});
+  findUser(email: string) {
+    console.log("find one user funciona")
+    return this.userRepository.findOneBy({ email });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+  logIn(user: User){
+    return `You have logged in: ${user.email}`;
   }
 
-  remove(id: number) {
-    return this.userRepository.delete(id);
+  update(userId: number, user: any) {
+    return `Your user(${userId}) has been updated with ${JSON.stringify(user)}`;
+  }
+
+  remove(userId: string) {
+    return `the user ${userId} removed`;
   }
 }

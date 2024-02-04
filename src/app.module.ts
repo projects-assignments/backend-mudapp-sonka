@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { UserModule } from './user/user.module';
 import { join } from 'path';
 import { CarrierModule } from './carrier/carrier.module';
+import { PaymentModule } from './payment/payment.module';
+import { ServiceModule } from './service/service.module';
+import { RatingModule } from './rating/rating.module';
+import { VehicleModule } from './vehicle/vehicle.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -15,14 +19,19 @@ import { CarrierModule } from './carrier/carrier.module';
       port: 3306,
       username: 'root',
       password: 'Pesmylove.22',
-      database: 'mydb',
+      database: 'mudapp',
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: false,
 
     }),
     UserModule,
-    CarrierModule],
+    CarrierModule,
+    PaymentModule,
+    ServiceModule,
+    RatingModule,
+    VehicleModule,
+    AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
